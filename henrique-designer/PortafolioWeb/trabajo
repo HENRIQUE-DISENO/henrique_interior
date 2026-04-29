@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Henrique Design – Especialista en diseño de interiores y mobiliario a medida en Sueca, Valencia.">
+  <title>Henrique Design | Interiorismo y Mobiliario</title>
+
+  <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES GLOBALES Y RESET
+       ========================================================================== */
+    :root {
+      --color-primario:    #18181b;   /* Negro cálido */
+      --color-secundario:  #b45309;   /* Ámbar oscuro */
+      --color-acento:      #d97706;   /* Ámbar vivo */
+      --color-fondo:       #fafaf9;   /* Crema muy suave */
+      --color-fondo-alt:   #f5f5f4;   /* Piedra clara */
+      --color-texto:       #3f3f46;
+      --color-texto-suave: #71717a;
+      --color-blanco:      #ffffff;
+      --color-borde:       #e4e4e7;
+
+      --fuente-display: 'Cormorant Garamond', Georgia, serif;
+      --fuente-body:    'DM Sans', sans-serif;
+
+      --radio:       8px;
+      --radio-lg:    16px;
+      --sombra:      0 4px 24px rgba(0,0,0,0.08);
+      --sombra-lg:   0 16px 48px rgba(0,0,0,0.12);
+      --transicion:  all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--fuente-body);
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==========================================================================
+       SISTEMA DE NAVEGACIÓN SOLO CSS (Radio Button Hack)
+       ========================================================================== */
+    input[type="radio"][name="navegacion"] {
+      display: none;
+    }
+
+    .pagina {
+      display: none;
+      min-height: calc(100vh - 80px);
+      animation: fadeUp 0.45s ease forwards;
+    }
+
+    /* Página visible según el radio activo */
+    #nav-inicio:checked      ~ #pagina-inicio,
+    #nav-portfolio:checked   ~ #pagina-portfolio,
+    #nav-presupuesto:checked ~ #pagina-presupuesto,
+    #nav-contacto:checked    ~ #pagina-contacto {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       CABECERA
+       ========================================================================== */
+    header {
+      background-color: var(--color-primario);
+      color: var(--color-blanco);
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Logotipo */
+    .logo {
+      font-family: var(--fuente-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      font-weight: 300;
+      color: var(--color-acento);
+    }
+
+    /* Menú */
+    nav {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    nav label {
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 0.5rem 1.1rem;
+      border-radius: 6px;
+      transition: var(--transicion);
+      color: rgba(255,255,255,0.75);
+    }
+
+    nav label:hover {
+      color: var(--color-blanco);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* Estado activo en menú */
+    #nav-inicio:checked      ~ header nav label[for="nav-inicio"],
+    #nav-portfolio:checked   ~ header nav label[for="nav-portfolio"],
+    #nav-presupuesto:checked ~ header nav label[for="nav-presupuesto"],
+    #nav-contacto:checked    ~ header nav label[for="nav-contacto"] {
+      color: var(--color-acento);
+      background: rgba(217, 119, 6, 0.12);
+    }
+
+    /* ==========================================================================
+       COMPONENTES COMPARTIDOS
+       ========================================================================== */
+    .seccion-titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--color-primario);
+      line-height: 1.2;
+    }
+
+    .seccion-subtitulo {
+      color: var(--color-texto-suave);
+      font-size: 1.05rem;
+      max-width: 520px;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-secundario);
+      margin-bottom: 0.75rem;
+    }
+
+    .btn-primario {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--color-secundario);
+      color: var(--color-blanco);
+      padding: 0.85rem 2rem;
+      border-radius: var(--radio);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transicion);
+    }
+
+    .btn-primario:hover {
+      background: var(--color-acento);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(180, 83, 9, 0.3);
+    }
+
+    .divisor {
+      width: 48px;
+      height: 3px;
+      background: var(--color-secundario);
+      border-radius: 2px;
+      margin: 1rem 0;
+    }
+
+    /* ==========================================================================
+       PÁGINA 1: INICIO
+       ========================================================================== */
+
+    /* — Hero — */
+    .hero {
+      position: relative;
+      background-image:
+        linear-gradient(to bottom, rgba(24,24,27,0.65) 0%, rgba(24,24,27,0.5) 100%),
+        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 4rem clamp(1.5rem, 8vw, 8rem);
+      color: var(--color-blanco);
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--color-acento);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-family: var(--fuente-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      max-width: 12ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* — Sobre Mí — */
+    .sobre-mi {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 6rem clamp(1.5rem, 8vw, 8rem);
+      background: var(--color-blanco);
+    }
+
+    .sobre-mi-texto p {
+      margin-bottom: 1rem;
+      color: var(--color-texto);
+      line-height: 1.8;
+    }
+
+    .sobre-mi-imagen img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radio-lg);
+      box-shadow: var(--sombra-lg);
+    }
+
+    /* — Servicios — */
+    .servicios {
+      padding: 6rem clamp(1.5rem, 8vw, 8rem);
+      background: var(--color-fondo-alt);
+    }
+
+    .servicios-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .servicios-header .divisor {
+      margin: 1rem auto;
+    }
+
+    .grid-servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .servicio-card {
+      background: var(--color-blanco);
+      padding: 2.5rem 2rem;
+      border-radius: var(--radio-lg);
+      border: 1px solid var(--color-borde);
+      box-shadow: var(--sombra);
+      transition: var(--transicion);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servicio-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--color-secundario);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: var(--transicion);
+    }
+
+    .servicio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra-lg);
+    }
+
+    .servicio-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .servicio-icono {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .servicio-card h3 {
+      font-family: var(--fuente-display);
+      font-size: 1.4rem;
+      color: var(--color-primario);
+      margin-bottom: 0.75rem;
+    }
+
+    .servicio-card p {
+      color: var(--color-texto-suave);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       PÁGINA 2: PORTFOLIO
+       ========================================================================== */
+    .portfolio-header {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .portfolio-header .divisor { margin: 1rem auto; }
+
+    /* Filtros de categoría (solo visual, CSS puro) */
+    .portfolio-categorias {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 0 2rem 2rem;
+    }
+
+    .cat-badge {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 0.45rem 1.25rem;
+      border-radius: 999px;
+      background: var(--color-blanco);
+      border: 1px solid var(--color-borde);
+      color: var(--color-texto-suave);
+      cursor: default;
+    }
+
+    .cat-badge.activo {
+      background: var(--color-primario);
+      color: var(--color-blanco);
+      border-color: var(--color-primario);
+    }
+
+    /* Grid de galería */
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 0 clamp(1.5rem, 6vw, 6rem) 5rem;
+    }
+
+    .item-galeria {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radio-lg);
+      aspect-ratio: 4/3;
+      box-shadow: var(--sombra);
+      cursor: pointer;
+    }
+
+    .item-galeria img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .item-galeria:hover img {
+      transform: scale(1.08);
+    }
+
+    .capa-galeria {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(24,24,27,0.85) 0%, transparent 60%);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: var(--color-blanco);
+      opacity: 0;
+      transition: var(--transicion);
+    }
+
+    .item-galeria:hover .capa-galeria {
+      opacity: 1;
+    }
+
+    .capa-galeria .cat-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-acento);
+      margin-bottom: 0.3rem;
+    }
+
+    .capa-galeria h3 {
+      font-family: var(--fuente-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       PÁGINA 3: PRESUPUESTO
+       ========================================================================== */
+    .presupuesto-wrapper {
+      min-height: calc(100vh - 80px);
+      background:
+        linear-gradient(rgba(24,24,27,0.55), rgba(24,24,27,0.55)),
+        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=40');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+    }
+
+    .contenedor-form {
+      width: 100%;
+      max-width: 580px;
+      background: var(--color-blanco);
+      padding: 3.5rem 3rem;
+      border-radius: var(--radio-lg);
+      box-shadow: var(--sombra-lg);
+    }
+
+    .contenedor-form .etiqueta { display: block; }
+
+    .contenedor-form h2 {
+      font-family: var(--fuente-display);
+      font-size: 2rem;
+      color: var(--color-primario);
+      margin-bottom: 0.5rem;
+    }
+
+    .contenedor-form > p {
+      color: var(--color-texto-suave);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .grupo-form {
+      margin-bottom: 1.25rem;
+    }
+
+    .grupo-form label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-primario);
+    }
+
+    .grupo-form input[type="text"],
+    .grupo-form input[type="email"],
+    .grupo-form input[type="tel"],
+    .grupo-form select,
+    .grupo-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--color-borde);
+      border-radius: var(--radio);
+      font-family: var(--fuente-body);
+      font-size: 0.95rem;
+      color: var(--color-texto);
+      background: var(--color-fondo);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .grupo-form input:focus,
+    .grupo-form select:focus,
+    .grupo-form textarea:focus {
+      border-color: var(--color-secundario);
+      background: var(--color-blanco);
+    }
+
+    .grupo-form textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .grupo-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.875rem;
+      color: var(--color-texto-suave);
+    }
+
+    .grupo-checkbox input { margin-top: 3px; }
+
+    .grupo-checkbox a {
+      color: var(--color-secundario);
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       PÁGINA 4: CONTACTO
+       ========================================================================== */
+    .contacto-wrapper {
+      padding: 4rem clamp(1.5rem, 6vw, 6rem) 6rem;
+    }
+
+    .contacto-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .contacto-header .divisor { margin: 1rem auto; }
+
+    .contenedor-contacto {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      border-radius: var(--radio-lg);
+      overflow: hidden;
+      box-shadow: var(--sombra-lg);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .datos-empresa {
+      background: var(--color-primario);
+      color: var(--color-blanco);
+      padding: 3rem 2.5rem;
+    }
+
+    .datos-empresa h2 {
+      font-family: var(--fuente-display);
+      font-size: 1.75rem;
+      color: var(--color-acento);
+      margin-bottom: 2rem;
+    }
+
+    .item-dato {
+      margin-bottom: 1.75rem;
+    }
+
+    .item-dato strong {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--color-acento);
+      margin-bottom: 0.25rem;
+    }
+
+    .item-dato span {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .redes-contacto {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .redes-contacto a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      transition: var(--transicion);
+      letter-spacing: 0.5px;
+    }
+
+    .redes-contacto a:hover {
+      background: var(--color-secundario);
+      color: var(--color-blanco);
+    }
+
+    .mapa-empresa {
+      min-height: 420px;
+    }
+
+    .mapa-empresa iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    footer {
+      background: var(--color-primario);
+      color: #71717a;
+      padding: 3.5rem clamp(1.5rem, 8vw, 8rem) 1.5rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid #27272a;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col h4 {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      color: var(--color-blanco);
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    .redes-sociales {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .redes-sociales a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.7);
+      background: #27272a;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      transition: var(--transicion);
+    }
+
+    .redes-sociales a:hover {
+      background: var(--color-secundario);
+      color: var(--color-blanco);
+    }
+
+    .aviso-legal a {
+      display: block;
+      font-size: 0.875rem;
+      color: #71717a;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .aviso-legal a:hover {
+      color: var(--color-acento);
+    }
+
+    .footer-copy {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #52525b;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .sobre-mi {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .sobre-mi-imagen img {
+        height: 280px;
+      }
+
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem 1.5rem;
+        gap: 0.75rem;
+      }
+
+      nav label {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+      }
+
+      .hero {
+        align-items: center;
+        text-align: center;
+        min-height: 65vh;
+      }
+
+      .hero h1 { font-size: 2.25rem; }
+
+      .contenedor-form {
+        padding: 2.5rem 1.75rem;
+      }
+
+      .contenedor-contacto {
+        grid-template-columns: 1fr;
+      }
+
+      .mapa-empresa {
+        min-height: 300px;
+      }
+
+      .galeria-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 1rem 3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .galeria-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================================
+       CONTROLES DE NAVEGACIÓN (Solo CSS – Radio Button Hack)
+       ===================================================================== -->
+  <input type="radio" name="navegacion" id="nav-inicio"      checked>
+  <input type="radio" name="navegacion" id="nav-portfolio">
+  <input type="radio" name="navegacion" id="nav-presupuesto">
+  <input type="radio" name="navegacion" id="nav-contacto">
+
+  <!-- =====================================================================
+       CABECERA / NAVEGACIÓN PRINCIPAL
+       ===================================================================== -->
+  <header>
+    <div class="logo">HENRIQUE <span>DESIGN</span></div>
+    <nav aria-label="Menú principal">
+      <label for="nav-inicio">Inicio</label>
+      <label for="nav-portfolio">Portfolio</label>
+      <label for="nav-presupuesto">Presupuesto</label>
+      <label for="nav-contacto">Contacto</label>
+    </nav>
+  </header>
+
+  <!-- =====================================================================
+       PÁGINA 1: INICIO
+       ===================================================================== -->
+  <main id="pagina-inicio" class="pagina">
+
+    <!-- Sección 1: Hero -->
+    <section class="hero" aria-label="Portada">
+      <p class="hero-kicker">Diseño de Interiores · Sueca, Valencia</p>
+      <h1>Diseño que Transforma Espacios</h1>
+      <p>Especialista en interiores funcionales y mobiliario a medida, llevando la elegancia de los planos a la realidad.</p>
+      <label for="nav-portfolio" class="btn-primario" role="button" aria-label="Ver portfolio">
+        Ver Portfolio →
+      </label>
+    </section>
+
+    <!-- Sección 2: Sobre Mí -->
+    <section class="sobre-mi" aria-labelledby="titulo-sobre-mi">
+      <article class="sobre-mi-texto">
+        <span class="etiqueta">Sobre mí</span>
+        <h2 id="titulo-sobre-mi" class="seccion-titulo">Henrique da Costa Gomes</h2>
+        <div class="divisor"></div>
+        <p>Soy profesional del diseño con amplia experiencia en el desarrollo integral de proyectos de interiores y mobiliario, desde la conceptualización hasta la entrega final.</p>
+        <p>Me apasiona la creación de espacios funcionales y estéticamente atractivos, aplicando mis conocimientos en interpretación de planos y dirección de montajes a medida.</p>
+        <br>
+        <label for="nav-contacto" class="btn-primario" role="button">Contactar →</label>
+      </article>
+      <figure class="sobre-mi-imagen">
+        <img
+          src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&w=800&q=80"
+          alt="Sala de estar moderna diseñada por Henrique"
+          loading="lazy">
+      </figure>
+    </section>
+
+    <!-- Sección 3: Servicios -->
+    <section class="servicios" aria-labelledby="titulo-servicios">
+      <header class="servicios-header">
+        <span class="etiqueta">Lo que ofrezco</span>
+        <h2 id="titulo-servicios" class="seccion-titulo">Mis Servicios</h2>
+        <div class="divisor"></div>
+      </header>
+      <div class="grid-servicios">
+        <article class="servicio-card">
+          <div class="servicio-icono" aria-hidden="true">🏡</div>
+          <h3>Diseño de Interiores</h3>
+          <p>Conceptualización, selección de materiales y distribución de espacios residenciales y comerciales adaptados a cada cliente.</p>
+        </article>
+        <article class="servicio-card">
+          <div class="servicio-icono" aria-hidden="true">🪑</div>
+          <h3>Mobiliario a Medida</h3>
+          <p>Interpretación de planos técnicos y manufacturación de soluciones personalizadas para cada espacio y necesidad.</p>
+        </article>
+        <article class="servicio-card">
+          <div class="servicio-icono" aria-hidden="true">📐</div>
+          <h3>Gestión de Proyectos</h3>
+          <p>Planificación, supervisión de equipos y ejecución rigurosa desde el primer boceto hasta la entrega final del proyecto.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       PÁGINA 2: PORTFOLIO
+       ===================================================================== -->
+  <main id="pagina-portfolio" class="pagina">
+
+    <header class="portfolio-header">
+      <span class="etiqueta">Galería de Proyectos</span>
+      <h2 class="seccion-titulo">Mis Trabajos</h2>
+      <div class="divisor" style="margin:1rem auto;"></div>
+      <p class="seccion-subtitulo" style="margin:0 auto;">Explora proyectos recientes en diseño de interiores e instalación de mobiliario.</p>
+    </header>
+
+    <!-- Etiquetas de categoría (decorativas) -->
+    <div class="portfolio-categorias" aria-label="Categorías del portfolio">
+      <span class="cat-badge activo">Todos</span>
+      <span class="cat-badge">Salón</span>
+      <span class="cat-badge">Cocina</span>
+      <span class="cat-badge">Despacho</span>
+      <span class="cat-badge">Dormitorio</span>
+    </div>
+
+    <!-- Grid de imágenes – 4 categorías: salón, cocina, despacho, dormitorio -->
+    <section class="galeria-grid" aria-label="Galería de proyectos">
+
+      <!-- Salón contemporáneo -->
+      <figure class="item-galeria">
+        <img src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=600&q=80"
+             alt="Salón contemporáneo con sofá gris y mueble TV empotrado" loading="lazy">
+        <figcaption class="capa-galeria">
+          <span class="cat-label">Salón contemporáneo</span>
+          <h3>Living Suite Minimalista</h3>
+        </figcaption>
+      </figure>
+
+      <!-- Cocina integrada -->
+      <figure class="item-galeria">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80"
+             alt="Cocina integrada con isla central y madera natural" loading="lazy">
+        <figcaption class="capa-galeria">
+          <span class="cat-label">Cocina integrada</span>
+          <h3>Cocina Industrial Steel</h3>
+        </figcaption>
+      </figure>
+
+      <!-- Despacho creativo -->
+      <figure class="item-galeria">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80"
+             alt="Despacho creativo con escritorio de madera y estantería oscura" loading="lazy">
+        <figcaption class="capa-galeria">
+          <span class="cat-label">Despacho creativo</span>
+          <h3>Home Office Moderno</h3>
+        </figcaption>
+      </figure>
+
+      <!-- Dormitorio minimalista -->
+      <figure class="item-galeria">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=600&q=80"
+             alt="Dormitorio minimalista en tonos beige con grandes ventanales" loading="lazy">
+        <figcaption class="capa-galeria">
+          <span class="cat-label">Dormitorio minimalista</span>
+          <h3>Suite Nórdica</h3>
+        </figcaption>
+      </figure>
+
+      <!-- Salón residencial -->
+      <figure class="item-galeria">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80"
+             alt="Salón con mobiliario a medida de madera natural" loading="lazy">
+        <figcaption class="capa-galeria">
+          <span class="cat-label">Salón contemporáneo</span>
+          <h3>Mobiliario Compac a Medida</h3>
+        </figcaption>
+      </figure>
+
+      <!-- Reforma integral -->
+      <figure class="item-galeria">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80"
+             alt="Baño de diseño reformado integralmente" loading="lazy">
+        <figcaption class="capa-galeria">
+          <span class="cat-label">Reforma integral</span>
+          <h3>Baño Premium</h3>
+        </figcaption>
+      </figure>
+
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       PÁGINA 3: PRESUPUESTO
+       ===================================================================== -->
+  <main id="pagina-presupuesto" class="pagina">
+    <div class="presupuesto-wrapper">
+      <section class="contenedor-form" aria-labelledby="titulo-presupuesto">
+
+        <span class="etiqueta">Sin compromiso</span>
+        <h2 id="titulo-presupuesto">Solicitar Presupuesto</h2>
+        <p>Cuéntanos tu proyecto y te respondemos en menos de 24 h.</p>
+
+        <!-- Formulario con validación HTML5 nativa -->
+        <form action="#" method="POST" novalidate>
+
+          <div class="grupo-form">
+            <label for="nombre">Nombre completo <span aria-hidden="true">*</span></label>
+            <input type="text" id="nombre" name="nombre" required
+                   placeholder="Tu nombre completo"
+                   autocomplete="name">
+          </div>
+
+          <div class="grupo-form">
+            <label for="email">Correo electrónico <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" required
+                   placeholder="tu@correo.com"
+                   autocomplete="email">
+          </div>
+
+          <div class="grupo-form">
+            <label for="telefono">Teléfono <span aria-hidden="true">*</span></label>
+            <input type="tel" id="telefono" name="telefono" required
+                   pattern="[0-9]{9,15}"
+                   title="Introduce un número de teléfono válido (9–15 dígitos)"
+                   placeholder="Ej: 604 21 80 89"
+                   autocomplete="tel">
+          </div>
+
+          <div class="grupo-form">
+            <label for="servicio">Tipo de servicio</label>
+            <select id="servicio" name="servicio">
+              <option value="" disabled selected>Selecciona un servicio…</option>
+              <option value="interiores">Diseño de Interiores</option>
+              <option value="mobiliario">Mobiliario a Medida</option>
+              <option value="gestion">Gestión de Proyectos</option>
+              <option value="reforma">Reforma Integral</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="grupo-form">
+            <label for="info">Descripción del proyecto <span aria-hidden="true">*</span></label>
+            <textarea id="info" name="info" required
+                      placeholder="Describe las necesidades de tu proyecto: tipo de espacio, superficie aproximada, plazos…"></textarea>
+          </div>
+
+          <div class="grupo-checkbox">
+            <input type="checkbox" id="privacidad" name="privacidad" required>
+            <label for="privacidad">
+              Acepto la <a href="#">Política de Privacidad</a> y el tratamiento de mis datos para gestionar mi solicitud.
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primario" style="width:100%;justify-content:center;font-size:1rem;">
+            Enviar Solicitud →
+          </button>
+
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       PÁGINA 4: CONTACTO
+       ===================================================================== -->
+  <main id="pagina-contacto" class="pagina">
+    <div class="contacto-wrapper">
+
+      <header class="contacto-header">
+        <span class="etiqueta">Estamos en Sueca</span>
+        <h2 class="seccion-titulo">Datos de Contacto</h2>
+        <div class="divisor" style="margin:1rem auto;"></div>
+      </header>
+
+      <div class="contenedor-contacto">
+
+        <!-- Datos de la empresa -->
+        <aside class="datos-empresa" aria-label="Información de contacto">
+          <h2>¿Hablamos?</h2>
+
+          <div class="item-dato">
+            <strong>Dirección</strong>
+            <span>Sueca, Comunidad Valenciana, España</span>
+          </div>
+
+          <div class="item-dato">
+            <strong>Teléfono</strong>
+            <span>+34 604 21 80 89</span>
+          </div>
+
+          <div class="item-dato">
+            <strong>Correo electrónico</strong>
+            <span>henriquedac.gomes@gmail.com</span>
+          </div>
+
+          <div class="item-dato">
+            <strong>Horario</strong>
+            <span>Lun – Vie: 9:00 – 18:00</span>
+          </div>
+
+          <nav class="redes-contacto" aria-label="Redes sociales">
+            <a href="https://www.linkedin.com/in/henrique-da-costa-gomes-553706331" target="_blank" rel="noopener" title="LinkedIn">LinkedIn</a>
+            <a href="https://www.instagram.com/henrique_interior_designer/" target="_blank" rel="noopener" title="Instagram">Instagram</a>
+            <a href="https://www.facebook.com/henriqueda.costagomes" target="_blank" rel="noopener" title="Facebook">Facebook</a>
+          </nav>
+        </aside>
+
+        <!-- Mapa de Google Maps – Sueca, Valencia -->
+        <div class="mapa-empresa">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49416.71186716949!2d-0.34586524963378906!3d39.20177240356592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6048d085ed06fb%3A0xc6657988cdcc8d80!2sSueca%2C%20Valencia!5e0!3m2!1ses!2ses!4v1714238512345!5m2!1ses!2ses"
+            title="Mapa de ubicación – Sueca, Valencia"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       PIE DE PÁGINA
+       ===================================================================== -->
+  <footer>
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h4>Henrique Design</h4>
+        <p>Especialistas en diseño de interiores<br>y mobiliario a medida.</p>
+        <p style="margin-top:0.5rem;">Sueca, Valencia, España.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Redes Sociales</h4>
+        <nav class="redes-sociales" aria-label="Redes sociales footer">
+          <a href="https://www.linkedin.com/in/henrique-da-costa-gomes-553706331" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/henrique_interior_designer/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/henriqueda.costagomes" target="_blank" rel="noopener">Facebook</a>
+        </nav>
+      </div>
+
+      <div class="footer-col aviso-legal">
+        <h4>Legal</h4>
+        <a href="#">Aviso Legal</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Uso de Cookies</a>
+      </div>
+
+    </div>
+
+    <p class="footer-copy">
+      &copy; 2026 Henrique da Costa Gomes. Todos los derechos reservados.
+    </p>
+  </footer>
+
+</body>
+</html>
